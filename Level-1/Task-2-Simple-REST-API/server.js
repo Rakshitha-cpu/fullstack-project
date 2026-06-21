@@ -1,7 +1,9 @@
 const express = require("express");
+const cors = require("cors");
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 
 // Sample Data
@@ -25,12 +27,12 @@ app.get("/", (req, res) => {
   res.send("Welcome to User Management REST API");
 });
 
-// READ - Get All Users
+// Get All Users
 app.get("/users", (req, res) => {
   res.json(users);
 });
 
-// READ - Get User By ID
+// Get User By ID
 app.get("/users/:id", (req, res) => {
   const user = users.find(
     (u) => u.id === parseInt(req.params.id)
@@ -45,8 +47,15 @@ app.get("/users/:id", (req, res) => {
   res.json(user);
 });
 
-// CREATE User
+// Create User
 app.post("/users", (req, res) => {
+
+  if (!req.body || !req.body.name) {
+    return res.status(400).json({
+      message: "Name is required"
+    });
+  }
+
   const newUser = {
     id: users.length + 1,
     name: req.body.name
@@ -60,8 +69,9 @@ app.post("/users", (req, res) => {
   });
 });
 
-// UPDATE User
+// Update User
 app.put("/users/:id", (req, res) => {
+
   const user = users.find(
     (u) => u.id === parseInt(req.params.id)
   );
@@ -69,6 +79,12 @@ app.put("/users/:id", (req, res) => {
   if (!user) {
     return res.status(404).json({
       message: "User not found"
+    });
+  }
+
+  if (!req.body || !req.body.name) {
+    return res.status(400).json({
+      message: "Name is required"
     });
   }
 
@@ -80,8 +96,9 @@ app.put("/users/:id", (req, res) => {
   });
 });
 
-// DELETE User
+// Delete User
 app.delete("/users/:id", (req, res) => {
+
   const userExists = users.find(
     (u) => u.id === parseInt(req.params.id)
   );

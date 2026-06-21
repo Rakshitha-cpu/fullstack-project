@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+
+        <header>
+            <h1>🚀 User Management Dashboard</h1>
+            <p>Full Stack Development Internship - Task 3</p>
+        </header>
+
+        <div class="controls">
+            <button id="loadUsers">Load Users</button>
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search User..."
+            >
+        </div>
+
+        <div class="stats">
+            <h3>Total Users: <span id="totalUsers">0</span></h3>
+        </div>
+
+        <table id="userTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                </tr>
+            </thead>
+
+            <tbody id="userBody">
+
+            </tbody>
+        </table>
+
+        <footer>
+            <p>Created by Rakshitha</p>
+        </footer>
+
+    </div>
+
+<script src="script.js"></script>
+</body>
+</html>
